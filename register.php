@@ -15,7 +15,7 @@ if(isset($_SESSION['user'])){
 <body>
 <div class="nav">
 	<h1 id="title">MyNote</h1>
-	<button id="login-btn" class="btn btn-primary">Log In</button>
+	<button id="login-btn" class="btn btn-primary" ><a href="./" style="color:white; text-decoration: none">Log In</a></button>
 </div>
 <div class="register-form">
 	<p id="reg-title">Register new account</p>
