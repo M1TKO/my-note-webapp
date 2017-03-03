@@ -1,0 +1,41 @@
+body {
+	/*background-color: #BFBFBF;*/
+	background-color: #DEE3DF;
+}
+
+.nav{
+	padding: 50px
+}
+
+.register-form {
+	width: 480px;
+	margin:auto;
+}
+
+.input-group{
+	margin:22px;
+	min-width: 200px; 
+}
+
+#title {
+	text-align: center;;
+	display: inline;
+	margin-left: 40%;
+	font-size: 60px;
+	color: #ffffff;
+	text-shadow: 1px 1px 4px black
+
+	/*display: inline-block;*/
+}
+
+#login-btn{
+	float: right;
+	display: inline-block;
+	margin-right: 10%;
+
+}
+#reg-title{
+	font-size: 30px;
+	text-align: center;
+	color: #585757;
+}
