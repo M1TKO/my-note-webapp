@@ -23,7 +23,8 @@ body {
 	margin-left: 40%;
 	font-size: 60px;
 	color: #ffffff;
-	text-shadow: 1px 1px 4px black
+	text-shadow: 1px 1px 4px black;
+	text-decoration: none;
 
 	/*display: inline-block;*/
 }
@@ -38,4 +39,7 @@ body {
 	font-size: 30px;
 	text-align: center;
 	color: #585757;
+}
+div[class="alert alert-danger"]{
+	display:none;
 }
