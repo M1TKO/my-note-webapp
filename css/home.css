@@ -1,0 +1,33 @@
+
+ body {
+  background-color: #DEE3DF;
+}
+
+#note{
+	padding-left: : 55px;
+}
+
+form{
+	float: left;
+	position: relative;
+	display: block;
+	width: 100%;
+	margin-top: 80px;
+	
+}
+form input[type=text]{
+	width: 80%;
+	height: 
+}
+form textarea{
+	max-width: 80%;
+}
+
+div[class="alert alert-danger"]{
+	display:none;
+	width: 80%;
+}
+div[class="alert alert-success"]{
+	display:none;
+	width: 80%;
+}

@@ -32,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 					if (!($db->userDataExists($email, 'email'))) {
 						$u = new User($uname, $pass, $email, $db);
 						$_SESSION['user'] = $uname;
+						$_SESSION['user_id'] = $db->getId($uname);
+
 						header('Location: home.php');
 					}
 				}

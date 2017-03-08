@@ -1,20 +1,19 @@
 <?php
-session_start();
+	session_start();
 
-if (isset($_SESSION['user'])) {
-	header('Location: home.php');
-}
+	if (isset($_SESSION['user'])) {
+		header('Location: home.php');
+	}
+	$stylesheet = '<link rel="stylesheet" type="text/css" href="css/style.css">';
+	$title = 'MyNote - Login';
+	$error = '';
+	require 'files/Validate.php';
+	require 'files/DB.php';
+	require 'files/headTemplate.php';
 
-$stylesheet = '<link rel="stylesheet" type="text/css" href="css/style.css">';
-$title = 'MyNote - Login';
-$error = '';
-require 'files/Validate.php';
-require 'files/DB.php';
-require 'files/headTemplate.php';
-
-$db = new DB('localhost', 'root', '', 'my_note');
+	$db = new DB('localhost', 'root', '', 'my_note');
 ?>
- <body>
+<body>
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -26,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				$pass_db = $db->userDataMatch('password', 'username', $uname);
 				if ($pass_db === $pass) {
 					$_SESSION['user'] = $uname;
+					$_SESSION['user_id'] = $db->getId($uname);
 					header('Location: home.php');
 				}
 				else {
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		  <div class="input-group">
 		    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i>
 			</span>
-		    <input id="username" type="text" class="form-control" name="username" placeholder="Username">
+		    <input id="username" type="text" class="form-control" name="username" placeholder="Username" autofocus>
 		  </div>
 		  <div class="input-group">
 		    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>

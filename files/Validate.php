@@ -53,12 +53,8 @@ class Validate{
 
     }
 
-     public static function noteTitle($title = ''){
-
-    }
-
-     public static function noteBody($body = ''){
-        
+     public static function noteText($data){
+        return self::test_input($data);
     }
 
      public static function test_input($data) {

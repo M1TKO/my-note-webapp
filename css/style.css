@@ -1,5 +1,4 @@
 body {
-	/*background-color: #BFBFBF;*/
 	background-color: #DEE3DF;
 }
 
@@ -25,8 +24,6 @@ body {
 	color: #ffffff;
 	text-shadow: 1px 1px 4px black;
 	text-decoration: none;
-
-	/*display: inline-block;*/
 }
 
 #login-btn{
