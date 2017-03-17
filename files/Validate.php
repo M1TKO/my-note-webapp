@@ -9,14 +9,16 @@ class Validate{
         } else{
             $user = self::test_input($user);
 
-
-            if(preg_match("/^[a-zA-Z0-9._-]{3,}$/m", $user) == true){
-
-                if (strlen($user) > 20) {
-                    throw new Exception("Username too long. ", 12);
-                } else {
-                    return $user;
-                }
+            if(preg_match("/^[a-zA-Z0-9._-]{3,}$/m", $user) == true) {
+                if(!(strlen($user) < 3)){
+                    if (strlen($user) > 20) {
+                        throw new Exception("Username too long. ", 12);
+                    } else {
+                        return $user;
+                    }
+                }else{
+                    throw new Exception('Username too short! ');
+            }   
 
             } else {
                 throw new Exception('Wrong username. ', 13);
@@ -31,6 +33,7 @@ class Validate{
             $pass = self::test_input($pass);
             if (strlen($pass) >40) {
                 throw new Exception("Password too long. ", 23);
+
             }else{
                 return $pass;
             }
@@ -41,11 +44,16 @@ class Validate{
         if(isset($email) && strlen($email) > 5){
             $email = filter_var($email, FILTER_SANITIZE_EMAIL);
             
+            if(filter_var($email, FILTER_VALIDATE_EMAIL)){
 
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL) == false && strlen($email) < 80) {
-                return $email;
-            } else{
-                throw new Exception("Wrong Email. ", 33);
+                if (strlen($email) < 80) {
+                    return $email;
+                } else{
+                    throw new Exception("Wrong Email. ", 33);
+                }
+            }else {
+                throw new Exception("Invalid Email address. ");
+                
             }
         } else {
             throw new Exception('Email too short. ', 31);
@@ -63,8 +71,4 @@ class Validate{
           $data = htmlspecialchars($data);
           return $data;
     }
-
-
-
-
 }

@@ -12,10 +12,12 @@ if (!isset($_SESSION['user'])) {
 	$db = new DB('localhost', 'root', '', 'my_note');
 	$notes = $db->getNotes($user_id);
 	$errorNewNote = '';
+	$errorChange = '';
 	$succMessage = "Done.";
 	$title = "MyNote - Home";
 	$stylesheet = '<link rel="stylesheet" type="text/css" href="css/home.css">';
 	include 'files/headTemplate.php';
+	include 'files/User.php';
 }
 ?>
 <body>
@@ -23,7 +25,7 @@ if (!isset($_SESSION['user'])) {
 	if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		if(isset($_POST['addNoteSubmit'])){
 			try{
-				echo '<pre>'.print_r($_POST, true).'</pre>';
+				// echo '<pre>'.print_r($_POST, true).'</pre>';
 
 				if(isset($_POST['note_title']) && strlen($_POST['note_title']) > 1){
 					$note_title = Validate::noteText($_POST['note_title']);
@@ -34,6 +36,7 @@ if (!isset($_SESSION['user'])) {
 						if( !($db->addNote($user_id, $note_title, $note_body)) ){
 							throw new Exception("Adding note failed. ");	
 						}else{;
+							header('Refresh: 0; ./');
 							echo '<style>div[class="alert alert-success"]{display:block;}</style>';
 						}
 
@@ -50,23 +53,89 @@ if (!isset($_SESSION['user'])) {
 			}
 		}
 
-		if(isset($_POST['logOut'])){
+
+		if(isset($_POST['change_username'])){
+			try{
+			$new_name = Validate::username($_POST['new_username']);
+			if(strlen($new_name) > 2){
+				if(!($db->userDataExists('username', $new_name))) {
+
+		            if($db->changeData('username', $user_id, $new_name)){
+		                $_SESSION['user'] = $new_name;
+		                echo "<div class='alert alert-success' style='display:block; width:800px; text-align:center;.'><strong>Done!</strong> Username changed to $new_name!</div>";
+		                $new_name = null;
+		            }else{
+		                echo "<div class='alert alert-danger' style='display:block; width:300px; text-align:center;'><strong>Warning!</strong> An error occured</div>";
+		                $new_name = null;
+		            }
+
+		        }else{
+		            echo "<div class='alert alert-danger' style='display:block; width:800px; text-align:center;' ><strong>Warning!</strong> Username already taken</div>";
+					$new_name = null;
+		        }
+		    }else{
+		        echo "<div class='alert alert-danger' style='display:block; width:300px; text-align:center;'><strong>Warning!</strong> Username too short!</div>";
+		    }
+
+	    	}catch(Exception $e){
+	    		$er = $e->getMessage();
+	    		echo "<div class='alert alert-danger' style='display:block; width:800px; text-align:center;' ><strong>Warning!</strong> $er </div>";
+	    	}
+
+		}
+
+		if(isset($_POST['change_password'])){
+			$new_pass = Validate::test_input($_POST['new_pass']);
+			$new_pass_c = Validate::test_input($_POST['new_pass_conf']);
+			if((!isset($new_pass) || strlen($new_pass) > 6 ) && (!isset($new_pass_c) || strlen($new_pass_c) > 6)){
+
+				if ($new_pass == $new_pass_c) {
+					if($db->changeData('password', $user_id, $new_pass)){
+		                echo "<div class='alert alert-success' style='display:block; width:800px; text-align:center;.'><strong>Done!</strong> Password changed!</div>";
+					}else{
+	                	echo "<div class='alert alert-danger' style='display:block; width:300px; text-align:center;'><strong>Warning!</strong> An error occured</div>";
+					}
+
+				}else{
+
+	            	echo "<div class='alert alert-danger' style='display:block; width:800px; text-align:center;' ><strong>Warning!</strong> Passwords doesn't match!</div>";
+
+				}
+
+			}else{
+				echo "<div class='alert alert-danger' style='display:block; width:800px; text-align:center;' ><strong>Warning!</strong> Passwords too short!</div>";
+		}
+	
+		if (isset($_POST['change_email'])) {
+		
 		}
 	}
+}
  ?>
 
-<div class="container-fluid">
-  <div class="row content">
-    <div class="col-sm-5">
-      <h1 id='userTitle'>MyNote</h1>
-      <h4><?php echo $_SESSION['user']; ?></h4>
+
+
+
+  
+
+
+<div class="container-fluid" >
+  <div class="row content" >
+    <div class="col-sm-5" >
+      <h1 id='title'>MyNote</h1>
+      <h4 id='userTitle'>Welcome, <?php echo $_SESSION['user']; ?>!</h4>
       <ul class="nav nav-pills nav-stacked col-sm-3">
-        <li><a href="#section1">Change username</a></li>
-        <li><a href="#section2">Change password</a></li>
-        <li><a href="#section3">Change email</a></li>
-        <li ><button id="logout_btn">Log Out</button></li>
+        <li><button id="change-username-btn" class="btn btn-info" data-toggle="modal" data-target="#myModalName">Change username</button></li>
+        <li><button id="change-pass-btn" class="btn btn-info" data-toggle="modal" data-target="#myModalPass">Change password</button></li>
+        <li><button id="change-email-btn" class="btn btn-info" data-toggle="modal" data-target="#myModalEmail">Change email</button></li>
+        <li><button id="logout_btn" class="btn btn-warning">Log Out</button></li>
       </ul><br>
-		
+	
+<?php include 'files/modals.php'; ?>
+
+
+
+
     <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
       	<div class="form-group">
       		<input type="text" name="note_title" placeholder="Note Title ..." class="form-control">
@@ -97,6 +166,11 @@ if (!isset($_SESSION['user'])) {
 
 	is_clicked_logout.onclick = function(){
 		window.location.assign('files/destroy.php');
+	}
+
+
+	function delNote(date) {
+		window.location.assign('files/del_note.php/?del=' + date);
 	}
 
 </script>

@@ -6,9 +6,8 @@
  !!!	removeAccount(username) // remove account from the system
  *
  */
-class DB
+class DB{
 
-{
 	private $db_host, $db_username, $db_password, $db_name = '';
 	private $conn;
 
@@ -28,24 +27,14 @@ class DB
 		}
 	}
 
-	public	function userDataExists($user_data, $col_name)
-	{
-		  header('Content-Type: text/html; charset=utf-8');
-		$query = "SELECT * FROM users WHERE $col_name = '" . $user_data . "';";
-		$result = mysqli_query( $this->conn, "SET NAMES utf8");
-		$result = mysqli_query($this->conn, $query);
-		if (mysqli_num_rows($result) > 0) {
+	public function userDataExists($col_name, $user_data){
+		  // header('Content-Type: text/html; charset=utf-8');
+		$query = "SELECT * FROM users WHERE ".$col_name." = '" . $user_data . "';";
+		$r = mysqli_query($this->conn, $query);
+		if (mysqli_num_rows($r) > 0) {
 			return true;
-
-			// echo "exists <br />";
-			// echo '<pre>'.print_r(mysqli_fetch_assoc($result), true).'</pre>';
-
-		}
-		else {
+		}else{
 			return false;
-
-			// echo "not exists";
-
 		}
 	}
 
@@ -54,7 +43,7 @@ class DB
 		$result = mysqli_query($this->conn, $query);
 		if (mysqli_num_rows($result) > 0) {
 			$row = mysqli_fetch_assoc($result);
-			return $row['password'];
+			return $row[$par1];
 		}
 		else {
 			return false;
@@ -88,7 +77,7 @@ class DB
 	}
 
 	public function getNotes($u_id)	{
-		$query = "SELECT title, body, date FROM notes WHERE user_id = $u_id ORDER BY date ASC;";
+		$query = "SELECT title, body, date FROM notes WHERE `user_id` = $u_id ORDER BY `date` DESC;";
 		$result = mysqli_query($this->conn, $query);
 		$row_num = mysqli_num_rows($result);
 
@@ -111,4 +100,33 @@ class DB
 		}
 
 	}
+
+	public function removeNote($u_id, $date){
+		if (DateTime::createFromFormat('Y-m-d H:m:s', $date) !== FALSE) {
+
+				$query = "DELETE FROM `notes` WHERE `notes`.`user_id` = $u_id AND `notes`.`date` = '".$date."' ";
+				if(mysqli_query($this->conn, $query)){
+					return true;
+				}else{
+					return false;
+				}
+
+
+		}else{
+			return false;
+		}
+
+	}
+
+public function changeData($type, $u_id, $new_data){
+	$query = "UPDATE users SET $type = '$new_data' WHERE user_id = $u_id";
+
+
+			if(mysqli_query($this->conn, $query)){
+				return true;
+			}else{
+				return false;
+			}
+
+		}
 }

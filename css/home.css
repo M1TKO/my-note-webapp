@@ -7,6 +7,16 @@
 	padding-left: : 55px;
 }
 
+#title{
+	font-size: 70px;
+	text-shadow: 1px 1px 1px black;
+}
+
+#userTitle{
+	font-size: 30px;
+	color:#838383;
+}
+
 form{
 	float: left;
 	position: relative;

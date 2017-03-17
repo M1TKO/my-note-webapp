@@ -7,8 +7,9 @@ class Note {
 
 				echo '<div class="row">
 						<div class="well" >
-	        				<h3>'. $value['title'] .'</h3>
-	        				<p>'. $value['body'] .'</p>
+						 <button type="button" class="close" style="color:red; font-size:45px;" onclick="delNote(\''. $value['date'] .'\')">&times;</button>
+	        				<h3 id="note-cont">'. $value['title'] .'</h3>
+	        				<p id="note-cont">'. $value['body'] .'</p>
 	        				<p align="right"><i>'. $value['date'] .'</i></p>
 	      				</div>
 		      		</div>';

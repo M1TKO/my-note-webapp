@@ -28,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 			$c_pass = Validate::password($_POST['conf-password']);
 			$email = Validate::email($_POST['email']);
 			if ($pass == $c_pass) {
-				if (!($db->userDataExists($uname, 'username'))) {
-					if (!($db->userDataExists($email, 'email'))) {
+				if (!($db->userDataExists('username', $uname))) {
+					if (!($db->userDataExists('email', $email))) {
 						$u = new User($uname, $pass, $email, $db);
 						$_SESSION['user'] = $uname;
 						$_SESSION['user_id'] = $db->getId($uname);

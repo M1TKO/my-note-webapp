@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		try {
 			$uname = Validate::username($_POST['username']);
 			$pass = Validate::password($_POST['password']);
-			if ($db->userDataExists($uname, 'username')) {
+			if ($db->userDataExists('username', $uname)) {
 				$pass_db = $db->userDataMatch('password', 'username', $uname);
 				if ($pass_db === $pass) {
 					$_SESSION['user'] = $uname;
