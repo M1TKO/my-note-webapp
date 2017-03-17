@@ -121,14 +121,14 @@ if (!isset($_SESSION['user'])) {
 
 <div class="container-fluid" >
   <div class="row content" >
-    <div class="col-sm-5" >
+    <div class="col-sm-5" style="height: 750px">
       <h1 id='title'>MyNote</h1>
-      <h4 id='userTitle'>Welcome, <?php echo $_SESSION['user']; ?>!</h4>
+      <h4 id='userTitle'>Welcome, <?php echo $_SESSION['user']; ?>!</h4><br />
       <ul class="nav nav-pills nav-stacked col-sm-3">
         <li><button id="change-username-btn" class="btn btn-info" data-toggle="modal" data-target="#myModalName">Change username</button></li>
         <li><button id="change-pass-btn" class="btn btn-info" data-toggle="modal" data-target="#myModalPass">Change password</button></li>
-        <li><button id="change-email-btn" class="btn btn-info" data-toggle="modal" data-target="#myModalEmail">Change email</button></li>
-        <li><button id="logout_btn" class="btn btn-warning">Log Out</button></li>
+        <li><button id="change-email-btn" class="btn btn-info" data-toggle="modal" data-target="#myModalEmail">Change email</button></li><br />
+        <li><button id="logout_btn" class="btn btn-danger">Log Out</button></li>
       </ul><br>
 	
 <?php include 'files/modals.php'; ?>
@@ -136,7 +136,7 @@ if (!isset($_SESSION['user'])) {
 
 
 
-    <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+    <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" style="display:block;">
       	<div class="form-group">
       		<input type="text" name="note_title" placeholder="Note Title ..." class="form-control">
       	</div>
