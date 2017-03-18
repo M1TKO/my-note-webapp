@@ -57,3 +57,32 @@
     </div>
   </div>
 
+
+<!-- Modal change Email -->
+    <div class="modal fade" id="myModalEmail" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Change your email</h4>
+        </div>
+        <div class="modal-body">
+            <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+                <!-- <div class="form-group">
+                    <input type="text" name="old_email" placeholder="Old email" class="form-control">
+                </div> -->
+                <div class="form-group">
+                    <input type="text" name="new_email" placeholder="New email" class="form-control">
+                </div>
+                <input type="submit" name="change_email" value="Change" class="btn btn-info">
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>

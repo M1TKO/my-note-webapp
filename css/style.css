@@ -5,7 +5,12 @@ body {
 .nav{
 	padding: 50px
 }
-
+#logo{
+	width: 200px;
+	display: block;
+	margin: auto;
+	/*margin-left: 40%*/
+}
 .register-form {
 	width: 480px;
 	margin:auto;
@@ -19,7 +24,7 @@ body {
 #title {
 	text-align: center;;
 	display: inline;
-	margin-left: 40%;
+	margin-left: 45%;
 	font-size: 60px;
 	color: #ffffff;
 	text-shadow: 1px 1px 4px black;
@@ -27,7 +32,8 @@ body {
 }
 
 #login-btn{
-	float: right;
+	margin: 20px;
+	margin-left: 48.5%;
 	display: inline-block;
 	margin-right: 10%;
 

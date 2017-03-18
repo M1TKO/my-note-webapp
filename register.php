@@ -52,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 ?>
 <div class="nav">
+ 	<img src="logo-note.png" alt="logo-note" id="logo"><br>
 	<h1 id="title"><a href="./" style="color: white;text-decoration: none;">MyNote</a></h1>
 	<a href="./" id="login-btn" class="btn btn-primary" ><style="color:white; text-decoration: none">Log In</a>
 </div>

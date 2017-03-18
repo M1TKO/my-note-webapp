@@ -122,6 +122,7 @@ if (!isset($_SESSION['user'])) {
 <div class="container-fluid" >
   <div class="row content" >
     <div class="col-sm-5" style="height: 750px">
+    <img src="logo-note.png" alt="logo-note" width="200px">
       <h1 id='title'>MyNote</h1>
       <h4 id='userTitle'>Welcome, <?php echo $_SESSION['user']; ?>!</h4><br />
       <ul class="nav nav-pills nav-stacked col-sm-3">
