@@ -62,24 +62,24 @@ if (!isset($_SESSION['user'])) {
 
 		            if($db->changeData('username', $user_id, $new_name)){
 		                $_SESSION['user'] = $new_name;
-		                echo "<div class='alert alert-success' style='display:block; width:800px; text-align:center;.'><strong>Done!</strong> Username changed to $new_name!</div>";
+		                echo "<div class='alert alert-success' style='display:block; text-align:center;.'><strong>Done!</strong> Username changed to $new_name!</div>";
 		                $new_name = null;
 		            }else{
-		                echo "<div class='alert alert-danger' style='display:block; width:300px; text-align:center;'><strong>Warning!</strong> An error occured</div>";
+		                echo "<div class='alert alert-danger' style='display:block; text-align:center;'><strong>Warning!</strong> An error occured</div>";
 		                $new_name = null;
 		            }
 
 		        }else{
-		            echo "<div class='alert alert-danger' style='display:block; width:800px; text-align:center;' ><strong>Warning!</strong> Username already taken</div>";
+		            echo "<div class='alert alert-danger' style='display:block; text-align:center;' ><strong>Warning!</strong> Username already taken</div>";
 					$new_name = null;
 		        }
 		    }else{
-		        echo "<div class='alert alert-danger' style='display:block; width:300px; text-align:center;'><strong>Warning!</strong> Username too short!</div>";
+		        echo "<div class='alert alert-danger' style='display:block; text-align:center;'><strong>Warning!</strong> Username too short!</div>";
 		    }
 
 	    	}catch(Exception $e){
 	    		$er = $e->getMessage();
-	    		echo "<div class='alert alert-danger' style='display:block; width:800px; text-align:center;' ><strong>Warning!</strong> $er </div>";
+	    		echo "<div class='alert alert-danger' style='display:block; text-align:center;' ><strong>Warning!</strong> $er </div>";
 	    	}
 
 		}
@@ -91,26 +91,44 @@ if (!isset($_SESSION['user'])) {
 
 				if ($new_pass == $new_pass_c) {
 					if($db->changeData('password', $user_id, $new_pass)){
-		                echo "<div class='alert alert-success' style='display:block; width:800px; text-align:center;.'><strong>Done!</strong> Password changed!</div>";
+		                echo "<div class='alert alert-success' style='display:block; text-align:center;.'><strong>Done!</strong> Password changed!</div>";
 					}else{
-	                	echo "<div class='alert alert-danger' style='display:block; width:300px; text-align:center;'><strong>Warning!</strong> An error occured</div>";
+	                	echo "<div class='alert alert-danger' style='display:block; text-align:center;'><strong>Warning!</strong> An error occured</div>";
 					}
 
 				}else{
 
-	            	echo "<div class='alert alert-danger' style='display:block; width:800px; text-align:center;' ><strong>Warning!</strong> Passwords doesn't match!</div>";
+	            	echo "<div class='alert alert-danger' style='display:block; text-align:center;' ><strong>Warning!</strong> Passwords doesn't match!</div>";
 
 				}
 
 			}else{
-				echo "<div class='alert alert-danger' style='display:block; width:800px; text-align:center;' ><strong>Warning!</strong> Passwords too short!</div>";
-		}
+				echo "<div class='alert alert-danger' style='display:block; text-align:center;' ><strong>Warning!</strong> Passwords too short!</div>";
+			}
+		}	
 	
-		if (isset($_POST['change_email'])) {
-		
+		if(isset($_POST['change_email'])) {
+			try{
+				$new_email = Validate::email($_POST['new_email']);
+				
+				if( !($db->userDataExists('email', $new_email)) ){
+					if($db->changeData('email', $user_id, $new_email)){
+						echo "<div class='alert alert-success' style='display:block; text-align:center;' ><strong>Done!</strong> Email successfuly changerd to $new_email !</div>";
+					}else{
+						echo "<div class='alert alert-danger' style='display:block; text-align:center;' ><strong>Warning!</strong> An error occured!</div>";
+					}
+
+				}else{
+					echo "<div class='alert alert-danger' style='display:block; text-align:center;' ><strong>Warning!</strong> Email already exists in the system!</div>";
+
+				}
+			}catch(Exception $e){
+	    		$er = $e->getMessage();
+	    		echo "<div class='alert alert-danger' style='display:block; text-align:center;' ><strong>Warning!</strong> $er </div>";
+	    	}
 		}
 	}
-}
+
  ?>
 
 
@@ -121,7 +139,7 @@ if (!isset($_SESSION['user'])) {
 
 <div class="container-fluid" >
   <div class="row content" >
-    <div class="col-sm-5" style="height: 750px">
+    <div class="col-sm-5" style="height: 950px">
     <img src="logo-note.png" alt="logo-note" width="200px">
       <h1 id='title'>MyNote</h1>
       <h4 id='userTitle'>Welcome, <?php echo $_SESSION['user']; ?>!</h4><br />
@@ -161,7 +179,7 @@ if (!isset($_SESSION['user'])) {
     </div>
   </div>
 </div>
-
+<?php include 'files/footer.html'; ?>
 <script>
 	var is_clicked_logout = document.getElementById(`logout_btn`);
 

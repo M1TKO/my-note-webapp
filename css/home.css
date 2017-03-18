@@ -35,10 +35,12 @@ form textarea{
 
 div[class="alert alert-danger"]{
 	display:none;
-	width: 80%;
+	width: 100%;
 }
 div[class="alert alert-success"]{
 	display:none;
-	width: 80%;
+	width: 100%;
 }
+
+
 

@@ -87,5 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		  </div>
 		</form>
 </div>
+<?php include 'files/footer.html'; ?>
+
 </body>
 </html>

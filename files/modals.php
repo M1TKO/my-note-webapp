@@ -14,7 +14,7 @@
                     <input type="text" name="old_username" placeholder="Old username" class="form-control">
                 </div> -->
                 <div class="form-group">
-                    <input type="text" name="new_username" placeholder="New username" class="form-control">
+                    <input type="text" name="new_username" placeholder="New username" class="form-control" autofocus>
                 </div>
                 <input type="submit" name="change_username" value="Change" class="btn btn-info">
             </form>
@@ -41,10 +41,10 @@
         <div class="modal-body">
             <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                 <div class="form-group">
-                    <input type="text" name="new_pass" placeholder="New password" class="form-control">
+                    <input type="password" name="new_pass" placeholder="New password" class="form-control" autofocus>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="new_pass_conf" placeholder="Confirm new password" class="form-control">
+                    <input type="password" name="new_pass_conf" placeholder="Confirm new password" class="form-control">
                 </div>
                 <input type="submit" name="change_password" value="Change" class="btn btn-info">
             </form>
@@ -70,11 +70,8 @@
         </div>
         <div class="modal-body">
             <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-                <!-- <div class="form-group">
-                    <input type="text" name="old_email" placeholder="Old email" class="form-control">
-                </div> -->
                 <div class="form-group">
-                    <input type="text" name="new_email" placeholder="New email" class="form-control">
+                    <input type="email" name="new_email" placeholder="New email" class="form-control" autofocus>
                 </div>
                 <input type="submit" name="change_email" value="Change" class="btn btn-info">
             </form>
