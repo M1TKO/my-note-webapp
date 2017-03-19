@@ -3,15 +3,15 @@
 
 	if (isset($_SESSION['user'])) {
 		header('Location: home.php');
+	}else{
+		require 'files/Validate.php';
+		require 'files/DB.php';
+		require 'files/db_connect.php';
+		$stylesheet = '<link rel="stylesheet" type="text/css" href="css/style.css">';
+		$title = 'MyNote - Login';
+		$error = '';
+		require 'files/headTemplate.php';
 	}
-	$stylesheet = '<link rel="stylesheet" type="text/css" href="css/style.css">';
-	$title = 'MyNote - Login';
-	$error = '';
-	require 'files/Validate.php';
-	require 'files/DB.php';
-	require 'files/headTemplate.php';
-
-	$db = new DB('localhost', 'root', '', 'my_note');
 ?>
 <body>
 <?php
@@ -76,8 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		  <input id="submit-reg" type="submit" class="btn btn-success" value="Log In">
 		  </div>
 		</form>
+<?php include 'files/footer.html'; ?>
 </div>
 
-<?php include 'files/footer.html'; ?>
- </body>
- </html>
+</body>
+</html>

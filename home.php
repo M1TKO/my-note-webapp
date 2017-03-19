@@ -1,15 +1,15 @@
 <?php
 session_start();
-
 if (!isset($_SESSION['user'])) {
-  header('Location: index.php');
+  	header('Location: index.php');
 }else {
 	$user_id = $_SESSION['user_id'];
 	require 'files/Validate.php';
 	require 'files/Note.php';
+	require 'files/DB.php';
+	require 'files/db_connect.php';
+	include 'files/User.php';
 	$n = new Note();
-	include 'files/DB.php';
-	$db = new DB('localhost', 'root', '', 'my_note');
 	$notes = $db->getNotes($user_id);
 	$errorNewNote = '';
 	$errorChange = '';
@@ -17,7 +17,6 @@ if (!isset($_SESSION['user'])) {
 	$title = "MyNote - Home";
 	$stylesheet = '<link rel="stylesheet" type="text/css" href="css/home.css">';
 	include 'files/headTemplate.php';
-	include 'files/User.php';
 }
 ?>
 <body>
@@ -131,12 +130,6 @@ if (!isset($_SESSION['user'])) {
 
  ?>
 
-
-
-
-  
-
-
 <div class="container-fluid" >
   <div class="row content" >
     <div class="col-sm-5" style="height: 950px">
@@ -151,9 +144,6 @@ if (!isset($_SESSION['user'])) {
       </ul><br>
 	
 <?php include 'files/modals.php'; ?>
-
-
-
 
     <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" style="display:block;">
       	<div class="form-group">

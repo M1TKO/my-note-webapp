@@ -8,8 +8,7 @@ else {
 	require 'files/Validate.php';
 	require 'files/User.php';
 	include 'files/DB.php';
-	$db = new DB('localhost', 'root', '', 'my_note');
-
+	require 'files/db_connect.php';
 	$error = '';
 	$title = "MyNote - Register new account";
 	$stylesheet = '<link rel="stylesheet" type="text/css" href="css/style.css">';
@@ -88,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		</form>
 </div>
 <?php include 'files/footer.html'; ?>
+
 
 </body>
 </html>
