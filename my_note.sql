@@ -2,8 +2,9 @@
 -- Database: `my_note`
 --
 -- --------------------------------------------------------
-CREATE DATABASE `my_note`;
-USE `my_note`;
+--it is optimal (you can name the db how you want)
+-- CREATE DATABASE `my_note`;
+-- USE `my_note`;
 
 --
 -- Table structure for table `notes`
