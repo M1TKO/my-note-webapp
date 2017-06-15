@@ -13,12 +13,8 @@ class DB{
 
 	// private $host = $username = $password = $name;
 
-	public function __construct($db_host = '', $db_username = '', $db_password = '', $db_name = '')
-	{
-		if (!isset($db_host, $db_username, $db_name)) {
-			echo 'miss';
-		}
-		else {
+	public function __construct($db_host = '', $db_username = '', $db_password = '', $db_name = ''){
+		if (isset($db_host, $db_username, $db_name)) {
 			$this->conn = mysqli_connect($db_host, $db_username, $db_password, $db_name);
 			mysqli_set_charset($this->conn, "utf8");
 			if (!$this->conn) {
@@ -76,8 +72,8 @@ class DB{
 		return $row['user_id'];
 	}
 
-	public function getNotes($u_id)	{
-		$query = "SELECT title, body, date FROM notes WHERE `user_id` = $u_id ORDER BY `date` DESC;";
+	public function getNotes($u_id, $offset, $rowsperpage)	{
+		$query = "SELECT title, body, date FROM notes WHERE `user_id` = $u_id ORDER BY `date` DESC LIMIT " . $offset . ", " . $rowsperpage . ";";
 		$result = mysqli_query($this->conn, $query);
 		$row_num = mysqli_num_rows($result);
 
@@ -129,4 +125,13 @@ public function changeData($type, $u_id, $new_data){
 			}
 
 		}
+
+public function getNotesQuantity($u_id){
+	$query = "SELECT COUNT(*) AS `n` FROM notes WHERE user_id = '" . $u_id . "'";
+	$result = mysqli_query($this->conn, $query);
+	$resultVal = mysqli_fetch_assoc($result);
+	return (int) $resultVal['n'];
+
+}
+
 }

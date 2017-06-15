@@ -7,12 +7,12 @@ if (isset($_SESSION['user'])) {
 else {
 	require 'files/Validate.php';
 	require 'files/User.php';
-	include 'files/DB.php';
 	require 'files/db_connect.php';
 	$error = '';
 	$title = "MyNote - Register new account";
 	$stylesheet = '<link rel="stylesheet" type="text/css" href="css/style.css">';
 	include 'files/headTemplate.php';
+	
 }
 ?>
 <body>

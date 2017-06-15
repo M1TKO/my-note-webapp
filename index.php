@@ -5,7 +5,6 @@
 		header('Location: home.php');
 	}else{
 		require 'files/Validate.php';
-		require 'files/DB.php';
 		require 'files/db_connect.php';
 		$stylesheet = '<link rel="stylesheet" type="text/css" href="css/style.css">';
 		$title = 'MyNote - Login';

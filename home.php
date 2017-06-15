@@ -6,11 +6,10 @@ if (!isset($_SESSION['user'])) {
 	$user_id = $_SESSION['user_id'];
 	require 'files/Validate.php';
 	require 'files/Note.php';
-	require 'files/DB.php';
 	require 'files/db_connect.php';
 	include 'files/User.php';
+	include 'files/pagination.php';	// pagination and getting the notes from the Database
 	$n = new Note();
-	$notes = $db->getNotes($user_id);
 	$errorNewNote = '';
 	$errorChange = '';
 	$succMessage = "Done.";
@@ -166,6 +165,11 @@ if (!isset($_SESSION['user'])) {
     
     <div class="col-sm-5" id="note">
     <?php $n->displayNotes($notes); ?>
+    <div class="text-center">
+	    <ul class="pagination">
+	    	<?php showPaginationLinks($currentpage, $totalpages); ?>
+	    </ul>
+    </div>
     </div>
   </div>
 </div>
@@ -176,7 +180,6 @@ if (!isset($_SESSION['user'])) {
 	is_clicked_logout.onclick = function(){
 		window.location.assign('files/destroy.php');
 	}
-
 
 	function delNote(date) {
 		window.location.assign('files/del_note.php/?del=' + date);

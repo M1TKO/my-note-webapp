@@ -1,5 +1,5 @@
 <?php 
-
+require 'DB.php';
 $db_host = 'localhost';
 $db_name = 'root';
 $db_pass = '';

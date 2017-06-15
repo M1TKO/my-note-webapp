@@ -41,6 +41,8 @@ div[class="alert alert-success"]{
 	display:none;
 	width: 100%;
 }
-
+div.pagination{
+	/*margin:auto;*/
+}
 
 

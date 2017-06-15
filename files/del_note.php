@@ -1,7 +1,6 @@
 <?php 
 session_start();
-require 'DB.php';
-$db = new DB('localhost', 'root', '', 'my_note');
+require 'db_connect.php';
 
 parse_str($_SERVER['QUERY_STRING']);
 
